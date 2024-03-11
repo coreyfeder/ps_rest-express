@@ -1,0 +1,10 @@
+* {
+    box-sizing: border-box;
+    font-family: Roboto, Verdana, Geneva, Tahoma, sans-serif;
+}
+
+:root {
+    --color-main: rgb(207, 197, 121);
+    --color-secondary: rgb(142, 133, 97);
+    --color-tertiary: rgb(68, 63, 47);
+}
