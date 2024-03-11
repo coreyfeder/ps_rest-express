@@ -138,11 +138,11 @@ app.get(`${root}/user/:userid/profile/:data`, (req, res) => {
     res.send(`Oh no, that'd be an invasion of privacy. ${req.params.userid} probably doesn't want ${req.params.data} out in the open.`);
 });    
 
-// posts
+// get all posts
 app.get(`${root}/posts`, (req,res) => { res.json(posts) })
 
-//post
-app.get(`${root}/post/:postid`, (req,res) => {
+// get one post
+app.get(`${root}/post/:postid`, (req,res, next) => {
     const post = posts.find((p) => p.postid == req.params.postid);
     if(post) res.json(post);
     else next();
