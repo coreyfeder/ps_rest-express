@@ -16,21 +16,22 @@ const posts = require("./data/posts");
 
 // MIDDLEWARE
 
-app.use(bodyParser.urlencoded({extended: true}))
-app.use(bodyParser.json({extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ extended: true }));
 
 // `pass()` => pass control to the next middleware function
 // `pass("router")` => pass control back out of the router instance => skip the rest of the router’s middleware functions
 
 // a middleware function with no mount path => code executed for every request to the router
 router.use((req, res, next) => {
-    // console.log(`${Date.now()} : ${req.statusCode} : ${req.method} ${req.url} : ${req.originalUrl}`)
     console.log([
             Date.now(), 
             req.method, 
             req.originalUrl,
         ].join(' : '))
     next()
+
+    /* oooh, can I postlog? */
     console.log([
             Date.now(), 
             req.method,  // why doesn't res.method have this?
@@ -38,16 +39,7 @@ router.use((req, res, next) => {
             res.statusMessage,  // blanks?
             // JSON.stringify(res.json()),  // goddamn "[object Object]". How does .json() not know it's JSON?
         ].join(' : '))
-    // console.log(res.json());
-})
-
-// a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
-router.use('/user/:id', (req, res, next) => {
-    console.log('Request URL:', req.originalUrl)
-    next()
-}, (req, res, next) => {
-    console.log('Request Type:', req.method)
-    next()
+    // console.log(res.json());  // works, but is huge
 })
 
 // mount the router on the app
